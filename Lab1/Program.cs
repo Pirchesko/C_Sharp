@@ -6,7 +6,7 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Princess princess = new Princess();
+            Princess princess = new Princess(); 
             Friend friend = new Friend();
             Hall hall = new Hall();
 
