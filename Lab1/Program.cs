@@ -17,7 +17,7 @@ namespace Lab1
             for (i = 0; i < 37; i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()}");
+                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
                 princess.ThinkAboutContender(hall, friend, contender);
             }
 
@@ -25,14 +25,14 @@ namespace Lab1
             for (; i < 100; i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()}");
+                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
                 if (princess.ThinkAboutContender(hall, friend, contender) == PrincessMark.top)
                 {
                     Console.WriteLine("-------------------");
                     Console.WriteLine($"{hall.GetHappyMark(contender)}");
                     break;
                 }
-                
+                 
             }
 
             if (i == 100)
