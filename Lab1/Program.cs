@@ -6,39 +6,36 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Princess princess = new Princess(); 
-            Friend friend = new Friend();
             Hall hall = new Hall();
+            Princess princess = new Princess(hall); 
+            Friend friend = new Friend(hall);
 
             IContenderForPrincess contender;
-            int i;
 
-            //По классике пропускаем 37%
-            for (i = 0; i < 37; i++)
+            //Classic algorithm: skip 37%
+            for (int i = 0; i < 37; i++)
             {
                 contender = hall.GetNextContender();
                 Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
-                princess.ThinkAboutContender(hall, friend, contender);
+                princess.ThinkAboutContender(friend, contender);
             }
 
-            //Затем выбираем первого лучшего. Если такового нет - ничего не делаем и остаёмся без принца
-            for (; i < 100; i++)
+            //Choose frist best contender. if all contenders are not best - then Princess will not married
+            for (int i = 37; i < 100; i++)
             {
                 contender = hall.GetNextContender();
                 Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
-                if (princess.ThinkAboutContender(hall, friend, contender) == PrincessMark.top)
+                if (princess.ThinkAboutContender(friend, contender) == PrincessMark.top)
                 {
                     Console.WriteLine("-------------------");
                     Console.WriteLine($"{hall.GetHappyMark(contender)}");
                     break;
                 }
-                 
-            }
-
-            if (i == 100)
-            {
-                Console.WriteLine("-------------------");
-                Console.WriteLine("Принцесса никого не выбрала");
+                if (i == 99)
+                {
+                    Console.WriteLine("-------------------");
+                    Console.WriteLine("Принцесса никого не выбрала");
+                }
             }
         }
     }

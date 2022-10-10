@@ -8,21 +8,26 @@ using System.Threading.Tasks;
 namespace Lab1
 {
     /// <summary>
-    /// Randomizer отвечает за выдачу рандомного имени, фамилии, общей оценки текущего претендента
-    /// Подготовлено 2 файла: 
-    /// frist_names.txt - топ 100 популярных русских имён;
-    /// last_names.txt - топ 500 популярных русских фамилий;
+    /// Randomizer give random first name, last name and mark (0, INT_MAX)
+    /// Include 2 files: 
+    /// frist_names.txt - top 100 popular russian first name;
+    /// last_names.txt - top 500 popular russian last name;
     /// </summary>
     internal static class Randomizer
     {
-        private const string first_name_path = "D:\\Files\\Visual Studio\\C#\\Lab1\\frist_names.txt";
-        private const string last_name_path = "D:\\Files\\Visual Studio\\C#\\Lab1\\last_names.txt";
-        private const int first_name_count = 100;
-        private const int last_name_count = 500;
+        private const string pathFristName = "D:\\Files\\Visual Studio\\C#\\Lab1\\frist_names.txt";
+        private const string pathLastName = "D:\\Files\\Visual Studio\\C#\\Lab1\\last_names.txt";
+        private const int countFristName = 100;
+        private const int countLastName = 500;
+        //turn on \ turn off unique peoples (if need more than 500 people) 
+        private const bool unique = true; 
 
         private static Random rnd = new Random();
-        private static string[] first_name_list = new string[first_name_count];
-        private static string[] last_name_list = new string[last_name_count];
+        private static string[] listFristName = new string[countFristName];
+        private static string[] listLastName = new string[countLastName];
+
+        private static List<int> uniqueLastName = new List<int>();
+        private static List<int> uniqueMark = new List<int>();
 
         private static void InitList(string[] list, int list_size, string path)
         {
@@ -45,23 +50,41 @@ namespace Lab1
 
         static Randomizer()
         {
-            InitList(first_name_list, first_name_count, first_name_path);
-            InitList(last_name_list, last_name_count, last_name_path);
+            InitList(listFristName, countFristName, pathFristName);
+            InitList(listLastName, countLastName, pathLastName);
         }
 
         public static string GetRandomFristName()
         {
-            return first_name_list[rnd.Next(0, first_name_count)];
+            int random = rnd.Next(0, countFristName);
+            return listFristName[random];
         }
 
         public static string GetRandomLastName()
         {
-            return last_name_list[rnd.Next(0, last_name_count)];
+            int random = rnd.Next(0, countLastName);
+            if (unique == true)
+            {
+                //wait unique id of last_name
+                while (uniqueLastName.Exists(x => x.Equals(random)) == true) 
+                {
+                    random = rnd.Next(0, countLastName);
+                }
+                uniqueLastName.Add(random);
+            }
+            return listLastName[random];
         }
 
         public static int GetRandomMark()
         {
-            return rnd.Next();
+            int random = rnd.Next();
+            //wait unique mark
+            while (uniqueMark.Exists(x => x.Equals(random)) == true)
+            {
+                random = rnd.Next();
+            }
+            uniqueMark.Add(random);
+            return random;
         }
     }
 }

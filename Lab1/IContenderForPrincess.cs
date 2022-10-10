@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    //Интерфейс для взаимодействия Принцессой (без GetMark())
+    //Interface for cooparation with Princess (without GetMark())
     internal interface IContenderForPrincess
     {
         public string GetFristName();

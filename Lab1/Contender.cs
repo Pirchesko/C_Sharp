@@ -7,30 +7,32 @@ using System.Threading.Tasks;
 namespace Lab1
 {
     /// <summary>
-    /// По дефолту класс инициализируется с рандомными именами, фамилиями, оценкой
-    /// Чтобы класс инициализировавлся без имен, фамилий и оценок используйте: new Contender(false)
+    /// For default class initialise with random first name, last name, mark
+    /// Use: new Contender(false); if you need init class without frist, last names and mark
     /// </summary>
     internal class Contender : IContenderForPrincess
     {
-        private string frist_name = null; //Фамилия
-        private string last_name = null; //Имя
-        private int mark = -1; //Оценка (0 <= mark <= inf)
+        private string fristName = null;
+        private string lastName = null;
+        private int mark = -1; 
 
         private void InitContender()
         {
-            frist_name = Randomizer.GetRandomFristName();
-            last_name = Randomizer.GetRandomLastName();
+            fristName = Randomizer.GetRandomFristName();
+            lastName = Randomizer.GetRandomLastName();
             mark = Randomizer.GetRandomMark();
         }
 
-        //По дефолту инициализация Conteder с рандомными именами и фамилиями
+        //Default: init Conteder with random fields
         public Contender()
         {
             InitContender();
-            //Console.WriteLine($"{frist_name} {last_name}");
         }
 
-        //Инициализировать Contender рандомными именами и фамилиями? true - да; false - нет
+        /// <summary>
+        /// Initialization Contender random frist name and last name? 
+        /// </summary>
+        /// <param name="check_init"> true - yes; false - no (init with null) </param>
         public Contender(bool check_init)
         {
             if (check_init == true)
@@ -39,45 +41,25 @@ namespace Lab1
             }
             else
             {
-                frist_name = null;
-                last_name = null;
+                fristName = null;
+                lastName = null;
                 mark = -1;
             }
         }
 
         public string GetFristName()
         {
-            return frist_name;
+            return fristName;
         }
 
         public string GetLastName()
         {
-            return last_name;
+            return lastName;
         }
 
         public int GetMark()
         {
             return mark;
-        }
-    }
-
-    //Класс для Sort() BynarySearch()
-    internal class ContenderComparer : IComparer<Contender>
-    {
-        public int Compare(Contender contender1, Contender contender2)
-        {
-            if (contender1.GetMark() > contender2.GetMark())
-            {
-                return 1;
-            }
-            else if (contender1.GetMark() < contender2.GetMark())
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }

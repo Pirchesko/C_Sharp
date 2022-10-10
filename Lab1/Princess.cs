@@ -6,47 +6,44 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    /// <summary>
-    /// Оценка принцессы: top - лучший, что попал к ней сразу; иначе - not_top
-    /// </summary>
-    enum PrincessMark
-    {
-        top,
-        not_top
-    }
-
     internal class Princess
     {
-        private List<IContenderForPrincess> top_contenders = new List<IContenderForPrincess>(); //Принцесса на основе подруги, составляет свой список самых лучших претендентов
-        //private IContenderForPrincess contender = new Contender(false); //Интерфейс претендента, не позволяющий вызвать метод GetMark()
+        private Hall hall;
+        //Princess bay a Friend, create list top contenders
+        private List<IContenderForPrincess> topContenders = new List<IContenderForPrincess>(); 
 
-        //Принцесса размышляет о текущим претенденте и сравнивает его с теми кто у неё был с помощью подруги
-        public PrincessMark ThinkAboutContender(Hall hall, Friend friend, IContenderForPrincess contender)
+        public Princess(Hall hall)
+        {
+            this.hall = hall;
+        }
+
+        //Princess thinking about current contender and compare with contender, which was accapt with help Friend
+        public PrincessMark ThinkAboutContender(Friend friend, IContenderForPrincess contender)
         {
             int i = 0;
-            if (top_contenders.Count != 0) 
+            if (topContenders.Count != 0) 
             {
-                while (i < top_contenders.Count) //Сравниваем со всеми кто был, чтобы определить иерархию у принцессы
+                //Compare with all who was accept for create top list Princess
+                while (i < topContenders.Count) 
                 {
-                    if (friend.CompareContenders(hall, contender, top_contenders[i]) == CompareType.better)
+                    if (friend.CompareContenders(contender, topContenders[i]) == CompareType.better)
                     {
-                        top_contenders.Insert(i, contender);
-                        if (i == 0) //Если с первого раза и сразу лучший - значит это тот, кто ей нужен (по тактике 37%)
+                        topContenders.Insert(i, contender);
+                        //If frist is top - then contender which need Princess
+                        if (i == 0) 
                         {
                             return PrincessMark.top;
                         }
-                        return PrincessMark.not_top;
+                        return PrincessMark.notTop;
                     }
                     i++;
                 }
-                top_contenders.Insert(i, contender);
-                return PrincessMark.not_top;
+                topContenders.Insert(i, contender);
+                return PrincessMark.notTop;
             }
-            else //Если никого не было у принцессы, добавляем по умолчанию
-            {
-                top_contenders.Add(contender);
-                return PrincessMark.not_top;
-            }
+            //If Princess has frist accept? Then accaept default
+            topContenders.Add(contender);
+            return PrincessMark.notTop;
         }
     }
 }

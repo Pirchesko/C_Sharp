@@ -2,44 +2,37 @@
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab1
 {
-    //Для сравнения претендентов, принимающихся у принцессы
-    enum CompareType
-    {
-        better,
-        worse,
-        dont_know
-    }
-
     internal class Friend
     {
-        /// <summary>
-        /// Первый претендент круче второго претендента?
-        /// </summary>
-        public CompareType CompareContenders(Hall hall, IContenderForPrincess contender1, IContenderForPrincess contender2) 
+        private Hall hall;
+        
+        public Friend(Hall hall)
         {
-            Contender contender1_ = (Contender)contender1;
-            Contender contender2_ = (Contender)contender2;
+            this.hall = hall;
+        }
 
-            //Подруга должна быть уверена, что принцесса спрашивает о тех, кто у неё не был
-            if ((hall.CheckContederInHall(contender1_) != false) || (hall.CheckContederInHall(contender2_) != false))
+        /// <summary>
+        /// Frist contender is better than second contender?
+        /// </summary>
+        public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
+        {
+            var contender_1 = (Contender)contender1;
+            var contender_2 = (Contender)contender2;
+
+            //Friend should be that Princess ask her about contenders, who was with Princess
+            if ((hall.CheckContederInHall(contender_1) == true) || (hall.CheckContederInHall(contender_2) == true))
             {
                 return CompareType.dont_know;
             }
 
-            //Кто лучше??
-            if (contender1_.GetMark() > contender2_.GetMark())
-            {
-                return CompareType.better;
-            }
-            else
-            {
-                return CompareType.worse;
-            }
+            //Who better?
+            return contender_1.GetMark() > contender_2.GetMark() ? CompareType.better : CompareType.worse;
         }
     }
 }
