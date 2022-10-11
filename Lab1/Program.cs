@@ -16,15 +16,17 @@ namespace Lab1
             for (int i = 0; i < 37; i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
+                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()}");
                 princess.ThinkAboutContender(friend, contender);
             }
+
+            Console.WriteLine("------ 37% skipped! ------");
 
             //Choose frist best contender. if all contenders are not best - then Princess will not married
             for (int i = 37; i < 100; i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()} {((Contender)contender).GetMark()}");
+                Console.WriteLine($"{contender.GetFristName()} {contender.GetLastName()}");
                 if (princess.ThinkAboutContender(friend, contender) == PrincessMark.top)
                 {
                     Console.WriteLine("-------------------");
