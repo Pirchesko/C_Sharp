@@ -10,24 +10,27 @@ namespace Lab1
     /// <summary>
     /// Randomizer give random first name, last name and mark (0, INT_MAX)
     /// Include 2 files: 
-    /// frist_names.txt - top 100 popular russian first name;
+    /// first_names.txt - top 100 popular russian first name;
     /// last_names.txt - top 500 popular russian last name;
     /// </summary>
     internal static class Randomizer
     {
-        private const string pathFristName = "D:\\Files\\Visual Studio\\C#\\Lab1\\frist_names.txt";
-        private const string pathLastName = "D:\\Files\\Visual Studio\\C#\\Lab1\\last_names.txt";
-        private const int countFristName = 100;
-        private const int countLastName = 500;
+        private const int _countFirstName = 100;
+        private const int _countLastName = 500;
+        private const string _fileFirstName = "first_names.txt";
+        private const string _fileLastName = "last_names.txt";
         //turn on \ turn off unique peoples (if need more than 500 people) 
-        private const bool unique = true; 
+        private const bool unique = true;
 
-        private static Random rnd = new Random();
-        private static string[] listFristName = new string[countFristName];
-        private static string[] listLastName = new string[countLastName];
+        private static readonly string _pathFirstName = Path.GetFullPath(_fileFirstName);
+        private static readonly string _pathLastName = Path.GetFullPath(_fileLastName);
 
-        private static List<int> uniqueLastName = new List<int>();
-        private static List<int> uniqueMark = new List<int>();
+        private static readonly Random rnd = new Random();
+        private static string[] _listFirstName = new string[_countFirstName];
+        private static string[] _listLastName = new string[_countLastName];
+
+        private static List<int> _uniqueLastName = new List<int>();
+        private static List<int> _uniqueMark = new List<int>();
 
         private static void InitList(string[] list, int list_size, string path)
         {
@@ -50,40 +53,40 @@ namespace Lab1
 
         static Randomizer()
         {
-            InitList(listFristName, countFristName, pathFristName);
-            InitList(listLastName, countLastName, pathLastName);
+            InitList(_listFirstName, _countFirstName, _pathFirstName);
+            InitList(_listLastName, _countLastName, _pathLastName);
         }
 
-        public static string GetRandomFristName()
+        public static string GetRandomFirstName()
         {
-            int random = rnd.Next(0, countFristName);
-            return listFristName[random];
+            int random = rnd.Next(0, _countFirstName);
+            return _listFirstName[random];
         }
 
-        public static string GetRandomLastName()
+        public static string GetRandomWithoutRepeatLastName()
         {
-            int random = rnd.Next(0, countLastName);
+            int random = rnd.Next(0, _countLastName);
             if (unique == true)
             {
                 //wait unique id of last_name
-                while (uniqueLastName.Exists(x => x.Equals(random)) == true) 
+                while (_uniqueLastName.Exists(x => x.Equals(random)) == true) 
                 {
-                    random = rnd.Next(0, countLastName);
+                    random = rnd.Next(0, _countLastName);
                 }
-                uniqueLastName.Add(random);
+                _uniqueLastName.Add(random);
             }
-            return listLastName[random];
+            return _listLastName[random];
         }
 
-        public static int GetRandomMark()
+        public static int GetRandomWithoutRepeatMark()
         {
             int random = rnd.Next();
             //wait unique mark
-            while (uniqueMark.Exists(x => x.Equals(random)) == true)
+            while (_uniqueMark.Exists(x => x.Equals(random)) == true)
             {
                 random = rnd.Next();
             }
-            uniqueMark.Add(random);
+            _uniqueMark.Add(random);
             return random;
         }
     }

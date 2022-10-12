@@ -12,29 +12,29 @@ namespace Lab1
     internal class Hall
     {
         //count contenders
-        private const int countContenders = 100;
+        private const int _contendersCount = 100;
         //hall which wait contenders
-        private List<Contender> hall = new List<Contender>();
+        private List<Contender> _hall = new List<Contender>();
         //sorted hall, for get level of happy Princess
-        private List<Contender> hallSort = new List<Contender>(); 
+        private List<Contender> _hallSort = new List<Contender>(); 
 
         public Hall()
         {
-            for(int i = 0; i < countContenders; i++)
+            for(int i = 0; i < _contendersCount; i++)
             {
-                hall.Add(new Contender());
+                _hall.Add(new Contender());
             }
 
-            hallSort.AddRange(from c in hall orderby c.GetMark() select c);
+            _hallSort.AddRange(from c in _hall orderby c.GetMark() select c);
         }
 
         //Getting conteder from hall
         public Contender GetNextContender()
         {
-            if (hall.Count > 0)
+            if (_hall.Count > 0)
             {
-                Contender contender = hall[0];
-                hall.RemoveAt(0);
+                Contender contender = _hall[0];
+                _hall.RemoveAt(0);
                 return contender;
             }
             else
@@ -46,7 +46,7 @@ namespace Lab1
         //Is contender in hall at the moment?
         public bool CheckContederInHall(Contender contender)
         {
-            return hall.Exists(x => x.Equals(contender)) ? true : false;
+            return _hall.Exists(x => x.Equals(contender));
         }
 
         //Get result in mark of happy to Princess
@@ -54,7 +54,7 @@ namespace Lab1
         {
             ContenderComparer cc = new ContenderComparer();
             //Sort from min to max + 1
-            int index = hallSort.BinarySearch((Contender)contender, cc) + 1; 
+            int index = _hallSort.BinarySearch((Contender)contender, cc) + 1; 
             if (index <= 50) index = 0;
             return index;
         }

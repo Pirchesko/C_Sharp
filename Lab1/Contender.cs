@@ -8,19 +8,19 @@ namespace Lab1
 {
     /// <summary>
     /// For default class initialise with random first name, last name, mark
-    /// Use: new Contender(false); if you need init class without frist, last names and mark
+    /// Use: new Contender(false); if you need init class without first, last names and mark
     /// </summary>
     internal class Contender : IContenderForPrincess
     {
-        private string fristName = null;
-        private string lastName = null;
+        private string _firstName = null;
+        private string _lastName = null;
         private int mark = -1; 
 
         private void InitContender()
         {
-            fristName = Randomizer.GetRandomFristName();
-            lastName = Randomizer.GetRandomLastName();
-            mark = Randomizer.GetRandomMark();
+            _firstName = Randomizer.GetRandomFirstName();
+            _lastName = Randomizer.GetRandomWithoutRepeatLastName();
+            mark = Randomizer.GetRandomWithoutRepeatMark();
         }
 
         //Default: init Conteder with random fields
@@ -30,31 +30,31 @@ namespace Lab1
         }
 
         /// <summary>
-        /// Initialization Contender random frist name and last name? 
+        /// Initialization Contender random first name and last name? 
         /// </summary>
-        /// <param name="check_init"> true - yes; false - no (init with null) </param>
-        public Contender(bool check_init)
+        /// <param name="checkInit"> true - yes; false - no (init with null) </param>
+        public Contender(bool checkInit)
         {
-            if (check_init == true)
+            if (checkInit == true)
             {
                 InitContender();
             }
             else
             {
-                fristName = null;
-                lastName = null;
+                _firstName = null;
+                _lastName = null;
                 mark = -1;
             }
         }
 
-        public string GetFristName()
+        public string GetFirstName()
         {
-            return fristName;
+            return _firstName;
         }
 
         public string GetLastName()
         {
-            return lastName;
+            return _lastName;
         }
 
         public int GetMark()

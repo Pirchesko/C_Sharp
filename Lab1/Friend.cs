@@ -10,29 +10,34 @@ namespace Lab1
 {
     internal class Friend
     {
-        private Hall hall;
+        private readonly Hall _hall;
         
         public Friend(Hall hall)
         {
-            this.hall = hall;
+            _hall = hall;
         }
 
         /// <summary>
-        /// Frist contender is better than second contender?
+        /// First contender is better than second contender?
         /// </summary>
         public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
         {
-            var contender_1 = (Contender)contender1;
-            var contender_2 = (Contender)contender2;
-
-            //Friend should be that Princess ask her about contenders, who was with Princess
-            if ((hall.CheckContederInHall(contender_1) == true) || (hall.CheckContederInHall(contender_2) == true))
+            if ((contender1 is Contender) && (contender2 is Contender))
             {
-                return CompareType.dont_know;
+                var cont1 = (Contender)contender1;
+                var cont2 = (Contender)contender2;
+
+                //Friend should be that Princess ask her about contenders, who was with Princess
+                if ((_hall.CheckContederInHall(cont1) == true) || (_hall.CheckContederInHall(cont2) == true))
+                {
+                    return CompareType.dont_know;
+                }
+
+                //Who better?
+                return cont1.GetMark() > cont2.GetMark() ? CompareType.better : CompareType.worse;
             }
 
-            //Who better?
-            return contender_1.GetMark() > contender_2.GetMark() ? CompareType.better : CompareType.worse;
+            return CompareType.dont_know;
         }
     }
 }
