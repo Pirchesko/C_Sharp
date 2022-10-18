@@ -15,19 +15,19 @@ namespace Lab1
     /// </summary>
     internal static class Randomizer
     {
-        private const int _countFirstName = 100;
-        private const int _countLastName = 500;
-        private const string _fileFirstName = "first_names.txt";
-        private const string _fileLastName = "last_names.txt";
+        private const int _FirstNameCount = 100;
+        private const int _LastNameCount = 500;
+        private const string _FileFirstName = "first_names.txt";
+        private const string _FileLastName = "last_names.txt";
         //turn on \ turn off unique peoples (if need more than 500 people) 
-        private const bool unique = true;
+        private const bool Unique = true;
 
-        private static readonly string _pathFirstName = Path.GetFullPath(_fileFirstName);
-        private static readonly string _pathLastName = Path.GetFullPath(_fileLastName);
+        private static readonly string _pathFirstName = Path.GetFullPath(_FileFirstName);
+        private static readonly string _pathLastName = Path.GetFullPath(_FileLastName);
 
-        private static readonly Random rnd = new Random();
-        private static string[] _listFirstName = new string[_countFirstName];
-        private static string[] _listLastName = new string[_countLastName];
+        private static readonly Random random = new Random();
+        private static string[] _listFirstName = new string[_FirstNameCount];
+        private static string[] _listLastName = new string[_LastNameCount];
 
         private static List<int> _uniqueLastName = new List<int>();
         private static List<int> _uniqueMark = new List<int>();
@@ -38,7 +38,7 @@ namespace Lab1
             int i = 0;
             try
             {
-                StreamReader sr = new StreamReader(path);
+                var sr = new StreamReader(path);
                 while ((line = sr.ReadLine()) != null)
                 {
                     list[i] = line;
@@ -53,41 +53,41 @@ namespace Lab1
 
         static Randomizer()
         {
-            InitList(_listFirstName, _countFirstName, _pathFirstName);
-            InitList(_listLastName, _countLastName, _pathLastName);
+            InitList(_listFirstName, _FirstNameCount, _pathFirstName);
+            InitList(_listLastName, _LastNameCount, _pathLastName);
         }
 
         public static string GetRandomFirstName()
         {
-            int random = rnd.Next(0, _countFirstName);
-            return _listFirstName[random];
+            int randomFristName = random.Next(0, _FirstNameCount);
+            return _listFirstName[randomFristName];
         }
 
         public static string GetRandomWithoutRepeatLastName()
         {
-            int random = rnd.Next(0, _countLastName);
-            if (unique == true)
+            int randomLastName = random.Next(0, _LastNameCount);
+            if (Unique == true)
             {
                 //wait unique id of last_name
                 while (_uniqueLastName.Exists(x => x.Equals(random)) == true) 
                 {
-                    random = rnd.Next(0, _countLastName);
+                    randomLastName = random.Next(0, _LastNameCount);
                 }
-                _uniqueLastName.Add(random);
+                _uniqueLastName.Add(randomLastName);
             }
-            return _listLastName[random];
+            return _listLastName[randomLastName];
         }
 
         public static int GetRandomWithoutRepeatMark()
         {
-            int random = rnd.Next();
+            int randomMark = random.Next();
             //wait unique mark
             while (_uniqueMark.Exists(x => x.Equals(random)) == true)
             {
-                random = rnd.Next();
+                randomMark = random.Next();
             }
-            _uniqueMark.Add(random);
-            return random;
+            _uniqueMark.Add(randomMark);
+            return randomMark;
         }
     }
 }

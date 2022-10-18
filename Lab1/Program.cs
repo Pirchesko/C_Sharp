@@ -8,9 +8,9 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Hall hall = new Hall();
-            Friend friend = new Friend(hall);
-            Princess princess = new Princess(hall, friend);
+            var hall = new Hall();
+            var friend = new Friend(hall);
+            var princess = new Princess(hall, friend);
 
             IContenderForPrincess contender;
 

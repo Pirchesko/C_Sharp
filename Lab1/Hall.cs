@@ -12,7 +12,7 @@ namespace Lab1
     internal class Hall
     {
         //count contenders
-        private const int _contendersCount = 100;
+        private const int _ContendersCount = 100;
         //hall which wait contenders
         private List<Contender> _hall = new List<Contender>();
         //sorted hall, for get level of happy Princess
@@ -20,7 +20,7 @@ namespace Lab1
 
         public Hall()
         {
-            for(int i = 0; i < _contendersCount; i++)
+            for(int i = 0; i < _ContendersCount; i++)
             {
                 _hall.Add(new Contender());
             }
@@ -52,7 +52,7 @@ namespace Lab1
         //Get result in mark of happy to Princess
         public int GetHappyMark(IContenderForPrincess contender)
         {
-            ContenderComparer cc = new ContenderComparer();
+            var cc = new ContenderComparer();
             //Sort from min to max + 1
             int index = _hallSort.BinarySearch((Contender)contender, cc) + 1; 
             if (index <= 50) index = 0;

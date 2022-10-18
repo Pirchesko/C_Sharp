@@ -14,13 +14,13 @@ namespace Lab1
     {
         private string _firstName = null;
         private string _lastName = null;
-        private int mark = -1; 
+        private int _mark = -1; 
 
         private void InitContender()
         {
             _firstName = Randomizer.GetRandomFirstName();
             _lastName = Randomizer.GetRandomWithoutRepeatLastName();
-            mark = Randomizer.GetRandomWithoutRepeatMark();
+            _mark = Randomizer.GetRandomWithoutRepeatMark();
         }
 
         //Default: init Conteder with random fields
@@ -43,8 +43,14 @@ namespace Lab1
             {
                 _firstName = null;
                 _lastName = null;
-                mark = -1;
+                _mark = -1;
             }
+        }
+
+        public override bool Equals(object obj) 
+        {
+            Contender contender = (Contender)obj;
+            return (contender._firstName == _firstName && contender._lastName == _lastName && contender._mark == _mark);
         }
 
         public string GetFirstName()
@@ -59,7 +65,7 @@ namespace Lab1
 
         public int GetMark()
         {
-            return mark;
+            return _mark;
         }
     }
 }
