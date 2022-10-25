@@ -43,6 +43,11 @@ namespace Lab1
             }
         }
 
+        public int GetContendersCount()
+        {
+            return _ContendersCount;
+        }
+
         //Is contender in hall at the moment?
         public bool CheckContederInHall(Contender contender)
         {

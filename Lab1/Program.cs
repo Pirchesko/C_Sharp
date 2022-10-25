@@ -15,8 +15,7 @@ namespace Lab1
             IContenderForPrincess contender;
 
             //Classic algorithm: skip 37%
-            int skip37 = 37;
-            for (int i = 0; i < skip37; i++)
+            for (int i = 0; i < 0.37 * hall.GetContendersCount(); i++)
             {
                 contender = hall.GetNextContender();
                 Console.WriteLine($"{contender.GetFirstName()} {contender.GetLastName()}");
@@ -26,7 +25,7 @@ namespace Lab1
             Console.WriteLine("------ 37% skipped! ------");
 
             //Choose first best contender. if all contenders are not best - then Princess will not married
-            for (int i = skip37; i < 100; i++)
+            for (int i = (int)(0.37 * hall.GetContendersCount()); i < 100; i++)
             {
                 contender = hall.GetNextContender();
                 Console.WriteLine($"{contender.GetFirstName()} {contender.GetLastName()}");
