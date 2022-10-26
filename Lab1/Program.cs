@@ -25,7 +25,7 @@ namespace Lab1
             Console.WriteLine("------ 37% skipped! ------");
 
             //Choose first best contender. if all contenders are not best - then Princess will not married
-            for (int i = (int)(0.37 * hall.GetContendersCount()); i < 100; i++)
+            for (int i = (int)(0.37 * hall.GetContendersCount()); i < hall.GetContendersCount(); i++)
             {
                 contender = hall.GetNextContender();
                 Console.WriteLine($"{contender.GetFirstName()} {contender.GetLastName()}");
@@ -35,7 +35,7 @@ namespace Lab1
                     Console.WriteLine($"{princess.GoToHallAndGetHappyMark(contender)}");
                     break;
                 }
-                if (i == 99)
+                if (i == hall.GetContendersCount() - 1)
                 {
                     Console.WriteLine("-------------------");
                     Console.WriteLine("Принцесса никого не выбрала");
