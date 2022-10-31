@@ -49,7 +49,7 @@ namespace Lab1
         }
 
         //Is contender in hall at the moment?
-        public bool CheckContederInHall(Contender contender)
+        public bool CheckContederInHall(IContenderForPrincess contender)
         {
             return _hall.Exists(x => x.Equals(contender));
         }

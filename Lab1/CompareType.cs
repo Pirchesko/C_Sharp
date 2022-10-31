@@ -10,7 +10,6 @@ namespace Lab1
     enum CompareType
     {
         better,
-        worse,
-        dont_know
+        worse
     }
 }
