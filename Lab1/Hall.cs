@@ -9,7 +9,7 @@ namespace Lab1
     /// <summary>
     /// Hall which live Contenders
     /// </summary>
-    internal class Hall
+    internal class Hall : IHallForPrincess
     {
         //count contenders
         private const int _ContendersCount = 100;
@@ -25,7 +25,7 @@ namespace Lab1
                 _hall.Add(new Contender());
             }
 
-            _hallSort.AddRange(from c in _hall orderby c.GetMark() select c);
+            _hallSort.AddRange(from c in _hall orderby c.Mark select c);
         }
 
         //Getting conteder from hall
@@ -39,7 +39,7 @@ namespace Lab1
             }
             else
             {
-                return new Contender(false);
+                throw new Exception("В коридоре больше нету претендентов!");
             }
         }
 
@@ -52,6 +52,19 @@ namespace Lab1
         public bool CheckContederInHall(IContenderForPrincess contender)
         {
             return _hall.Exists(x => x.Equals(contender));
+        }
+
+        //Get mark with search by FristName and LastName
+        public int GetMarkByName(IContenderForPrincess contender)
+        {
+            foreach (var cont in _hallSort)
+            {
+                if ((cont.FirstName == contender.FirstName) && (cont.LastName == contender.LastName))
+                {
+                    return cont.Mark;
+                }
+            }
+            throw new Exception("Такого претендента не существовало");
         }
 
         //Get result in mark of happy to Princess

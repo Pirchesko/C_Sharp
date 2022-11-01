@@ -9,7 +9,7 @@ namespace Lab1
     //For compare contender, who accepting by Princess
     enum CompareType
     {
-        better,
-        worse
+        Better,
+        Worse
     }
 }
