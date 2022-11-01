@@ -18,7 +18,7 @@ namespace Lab1
         }
 
         /// <summary>
-        /// First contender is better than second contender?
+        /// First contender is Better than second contender?
         /// </summary>
         public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
         {
@@ -28,7 +28,7 @@ namespace Lab1
                 throw new Exception("Подруга не может сравнивать претендентов, которые ещё не были у принцессы.");
             }
 
-            return ((Contender)contender1).GetMark() > ((Contender)contender2).GetMark() ? CompareType.better : CompareType.worse;
+            return (_hall.GetMarkByName(contender1) > _hall.GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
         }
     }
 }

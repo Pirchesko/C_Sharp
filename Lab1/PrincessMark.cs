@@ -8,7 +8,7 @@ namespace Lab1
 {
     enum PrincessMark
     {
-        top,
-        notTop
+        Top,
+        NotTop
     }
 }

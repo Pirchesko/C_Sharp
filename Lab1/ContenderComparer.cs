@@ -11,11 +11,11 @@ namespace Lab1
     {
         public int Compare(Contender contender1, Contender contender2)
         {
-            if (contender1.GetMark() > contender2.GetMark())
+            if (contender1.Mark > contender2.Mark)
             {
                 return 1;
             }
-            else if (contender1.GetMark() < contender2.GetMark())
+            else if (contender1.Mark < contender2.Mark)
             {
                 return -1;
             }

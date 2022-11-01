@@ -9,11 +9,11 @@ namespace Lab1
     internal class Princess
     {
         private readonly Friend _friend;
-        private readonly Hall _hall;
-        //Princess bay a Friend, create list top contenders
-        private List<IContenderForPrincess> _topContenders = new List<IContenderForPrincess>(); 
+        private readonly IHallForPrincess _hall;
+        //Princess bay a Friend, create list Top contenders
+        private List<IContenderForPrincess> _TopContenders = new List<IContenderForPrincess>(); 
 
-        public Princess(Hall hall, Friend friend)
+        public Princess(IHallForPrincess hall, Friend friend)
         {
             _friend = friend;
             _hall = hall;
@@ -23,29 +23,29 @@ namespace Lab1
         public PrincessMark ThinkAboutContender(IContenderForPrincess contender)
         {
             int i = 0;
-            if (_topContenders.Count != 0) 
+            if (_TopContenders.Count != 0) 
             {
-                //Compare with all who was accept for create top list Princess
-                while (i < _topContenders.Count) 
+                //Compare with all who was accept for create Top list Princess
+                while (i < _TopContenders.Count) 
                 {
-                    if (_friend.CompareContenders(contender, _topContenders[i]) == CompareType.better)
+                    if (_friend.CompareContenders(contender, _TopContenders[i]) == CompareType.Better)
                     {
-                        _topContenders.Insert(i, contender);
-                        //If first is top - then contender which need Princess
+                        _TopContenders.Insert(i, contender);
+                        //If first is Top - then contender which need Princess
                         if (i == 0) 
                         {
-                            return PrincessMark.top;
+                            return PrincessMark.Top;
                         }
-                        return PrincessMark.notTop;
+                        return PrincessMark.NotTop;
                     }
                     i++;
                 }
-                _topContenders.Insert(i, contender);
-                return PrincessMark.notTop;
+                _TopContenders.Insert(i, contender);
+                return PrincessMark.NotTop;
             }
             //If Princess has first accept? Then accaept default
-            _topContenders.Add(contender);
-            return PrincessMark.notTop;
+            _TopContenders.Add(contender);
+            return PrincessMark.NotTop;
         }
 
         public int GoToHallAndGetHappyMark(IContenderForPrincess contender)

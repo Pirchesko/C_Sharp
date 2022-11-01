@@ -9,7 +9,7 @@ namespace Lab1
     //Interface for cooparation with Princess (without GetMark())
     internal interface IContenderForPrincess
     {
-        public string GetFirstName();
-        public string GetLastName();
+        string FirstName { get; }
+        string LastName { get; }
     }
 }
