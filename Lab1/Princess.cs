@@ -10,7 +10,7 @@ namespace Lab1
     {
         private readonly Friend _friend;
         private readonly IHallForPrincess _hall;
-        //Princess bay a Friend, create list Top contenders
+        //Princess, with the help of her Friend, create list Top contenders
         private List<IContenderForPrincess> _TopContenders = new List<IContenderForPrincess>(); 
 
         public Princess(IHallForPrincess hall, Friend friend)
