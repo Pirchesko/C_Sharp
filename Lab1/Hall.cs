@@ -57,14 +57,15 @@ namespace Labs
         //Get mark with search by FristName and LastName
         public int GetMarkByName(IContenderForPrincess contender)
         {
-            foreach (var cont in _hallSort)
+            Contender? contenderWithMark = _hallSort.Find(x => x.FirstName == contender.FirstName && x.LastName == contender.LastName);
+            if (contenderWithMark != null)
             {
-                if ((cont.FirstName == contender.FirstName) && (cont.LastName == contender.LastName))
-                {
-                    return cont.Mark;
-                }
+                return contenderWithMark.Mark;
             }
-            throw new Exception("Такого претендента не существовало");
+            else
+            {
+                throw new Exception("Такого претендента не существовало");
+            }
         }
 
         //Get result in mark of happy to Princess (old mark)
