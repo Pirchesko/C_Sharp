@@ -14,7 +14,7 @@ namespace Labs
     {
         public string FirstName { get; private set; } = null;
         public string LastName { get; private set; } = null;
-        public int Mark { get; private set; } = -1; 
+        public int Mark { get; private set; } = -1;
 
         private void InitContender()
         {
@@ -47,7 +47,7 @@ namespace Labs
             }
         }
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
         {
             Contender contender = (Contender)obj;
             return (contender.FirstName == FirstName && contender.LastName == LastName && contender.Mark == Mark);

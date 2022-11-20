@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labs
 {
-    internal interface IHallForPrincess
+    internal interface IHall
     {
         //Get result in mark of happy to Princess (old mark)
         public int GetOldHappyMark(IContenderForPrincess contender);
@@ -14,10 +14,13 @@ namespace Labs
         //Get result in mark of happy to Princess (new mark)
         public int GetNewHappyMark(IContenderForPrincess contender);
 
-        //Get contenders count in hall
-        public int GetContendersCount();
-
         //Getting conteder from hall
         public Contender GetNextContender();
+
+        //Get mark with search by FristName and LastName
+        public int GetMarkByName(IContenderForPrincess contender);
+
+        //Is contender in hall at the moment?
+        public bool CheckContederInHall(IContenderForPrincess contender);
     }
 }

@@ -69,7 +69,7 @@ namespace Labs
             if (Unique == true)
             {
                 //wait unique id of last_name
-                while (_uniqueLastName.Exists(x => x.Equals(random)) == true) 
+                while (_uniqueLastName.Exists(x => x.Equals(random)) == true)
                 {
                     randomLastName = random.Next(0, _LastNameCount);
                 }

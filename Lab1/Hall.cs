@@ -9,18 +9,18 @@ namespace Labs
     /// <summary>
     /// Hall which live Contenders
     /// </summary>
-    internal class Hall : IHallForPrincess
+    internal class Hall : IHallForPrincess, IHall
     {
         //count contenders
         private const int _ContendersCount = 100;
         //hall which wait contenders
         private List<Contender> _hall = new List<Contender>();
         //sorted hall, for get level of happy Princess
-        private List<Contender> _hallSort = new List<Contender>(); 
+        private List<Contender> _hallSort = new List<Contender>();
 
         public Hall()
         {
-            for(int i = 0; i < _ContendersCount; i++)
+            for (int i = 0; i < _ContendersCount; i++)
             {
                 _hall.Add(new Contender());
             }
@@ -73,7 +73,7 @@ namespace Labs
         {
             var cc = new ContenderComparer();
             //Sort from min to max + 1
-            int index = _hallSort.BinarySearch((Contender)contender, cc) + 1; 
+            int index = _hallSort.BinarySearch((Contender)contender, cc) + 1;
             if (index <= 50) index = 0;
             return index;
         }

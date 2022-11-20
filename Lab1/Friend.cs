@@ -10,9 +10,9 @@ namespace Labs
 {
     internal class Friend
     {
-        private readonly Hall _hall;
+        private readonly IHall _hall;
         
-        public Friend(Hall hall)
+        public Friend(IHall hall)
         {
             _hall = hall;
         }
@@ -23,12 +23,12 @@ namespace Labs
         public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
         {
             //Friend should be that Princess ask her about contenders, who was with Princess
-            if ((_hall.CheckContederInHall(contender1) == true) || (_hall.CheckContederInHall(contender1) == true))
+            if ((((Hall)_hall).CheckContederInHall(contender1) == true) || (((Hall)_hall).CheckContederInHall(contender1) == true))
             {
                 throw new Exception("Подруга не может сравнивать претендентов, которые ещё не были у принцессы.");
             }
 
-            return (_hall.GetMarkByName(contender1) > _hall.GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
+            return (((Hall)_hall).GetMarkByName(contender1) > ((Hall)_hall).GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
         }
     }
 }
