@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     //Class for Sort() and BynarySearch()
     internal class ContenderComparer : IComparer<Contender>

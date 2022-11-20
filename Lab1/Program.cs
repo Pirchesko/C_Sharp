@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Lab1
+namespace Labs
 {
     internal class Program
     {
@@ -18,7 +18,7 @@ namespace Lab1
             for (int i = 0; i < 0.37 * hall.GetContendersCount(); i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.LastName} {contender.FirstName}");
+                Console.WriteLine($"№ {i}:\t{contender.LastName} {contender.FirstName}");
                 princess.ThinkAboutContender(contender);
             }
 
@@ -28,17 +28,18 @@ namespace Lab1
             for (int i = (int)(0.37 * hall.GetContendersCount()); i < hall.GetContendersCount(); i++)
             {
                 contender = hall.GetNextContender();
-                Console.WriteLine($"{contender.FirstName} {contender.LastName}");
+                Console.WriteLine($"№ {i}:\t{contender.FirstName} {contender.LastName}");
                 if (princess.ThinkAboutContender(contender) == PrincessMark.Top)
                 {
                     Console.WriteLine("-------------------");
-                    Console.WriteLine($"{princess.GoToHallAndGetHappyMark(contender)}");
+                    Console.WriteLine($"{princess.GoToHallAndGetOldHappyMark(contender)} => {princess.GoToHallAndGetNewHappyMark(contender)}");
                     break;
                 }
                 if (i == hall.GetContendersCount() - 1)
                 {
                     Console.WriteLine("-------------------");
                     Console.WriteLine("Принцесса никого не выбрала");
+                    Console.WriteLine($"{10} => {10}");
                 }
             }
         }

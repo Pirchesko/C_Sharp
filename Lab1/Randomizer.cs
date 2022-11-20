@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     /// <summary>
     /// Randomizer give random first name, last name and mark (0, INT_MAX)
     /// Include 2 files: 
-    /// first_names.txt - Top 100 popular russian first name;
-    /// last_names.txt - Top 500 popular russian last name;
+    /// first_names.txt - top 100 popular russian first name;
+    /// last_names.txt - top 500 popular russian last name;
     /// </summary>
     internal static class Randomizer
     {
