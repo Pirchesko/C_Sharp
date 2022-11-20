@@ -31,13 +31,13 @@ namespace Labs
                 Console.WriteLine($"№ {i}:\t{contender.FirstName} {contender.LastName}");
                 if (princess.ThinkAboutContender(contender) == PrincessMark.Top)
                 {
-                    Console.WriteLine("-------------------");
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine($"{princess.GoToHallAndGetOldHappyMark(contender)} => {princess.GoToHallAndGetNewHappyMark(contender)}");
                     break;
                 }
                 if (i == hall.GetContendersCount() - 1)
                 {
-                    Console.WriteLine("-------------------");
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Принцесса никого не выбрала");
                     Console.WriteLine($"{10} => {10}");
                 }
