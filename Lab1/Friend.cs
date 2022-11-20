@@ -23,12 +23,12 @@ namespace Labs
         public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
         {
             //Friend should be that Princess ask her about contenders, who was with Princess
-            if ((((Hall)_hall).CheckContederInHall(contender1) == true) || (((Hall)_hall).CheckContederInHall(contender1) == true))
+            if ((_hall.CheckContederInHall(contender1) == true) || (_hall.CheckContederInHall(contender1) == true))
             {
                 throw new Exception("Подруга не может сравнивать претендентов, которые ещё не были у принцессы.");
             }
 
-            return (((Hall)_hall).GetMarkByName(contender1) > ((Hall)_hall).GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
+            return (_hall.GetMarkByName(contender1) > _hall.GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
         }
     }
 }
