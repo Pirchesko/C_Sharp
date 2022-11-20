@@ -6,7 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     internal class Friend
     {
@@ -18,7 +18,7 @@ namespace Lab1
         }
 
         /// <summary>
-        /// First contender is Better than second contender?
+        /// First contender is better than second contender?
         /// </summary>
         public CompareType CompareContenders(IContenderForPrincess contender1, IContenderForPrincess contender2) 
         {
