@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     //Interface for cooparation with Princess (without GetMark())
     internal interface IContenderForPrincess
     {
-        public string GetFirstName();
-        public string GetLastName();
+        string FirstName { get; }
+        string LastName { get; }
     }
 }

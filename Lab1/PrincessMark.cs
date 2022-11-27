@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     enum PrincessMark
     {
-        top,
-        notTop
+        Top,
+        NotTop
     }
 }

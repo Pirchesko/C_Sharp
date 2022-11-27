@@ -6,13 +6,13 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     internal class Friend
     {
-        private readonly Hall _hall;
+        private readonly IHall _hall;
         
-        public Friend(Hall hall)
+        public Friend(IHall hall)
         {
             _hall = hall;
         }
@@ -28,7 +28,7 @@ namespace Lab1
                 throw new Exception("Подруга не может сравнивать претендентов, которые ещё не были у принцессы.");
             }
 
-            return ((Contender)contender1).GetMark() > ((Contender)contender2).GetMark() ? CompareType.better : CompareType.worse;
+            return (_hall.GetMarkByName(contender1) > _hall.GetMarkByName(contender2)) ? CompareType.Better : CompareType.Worse;
         }
     }
 }

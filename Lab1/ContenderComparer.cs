@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     //Class for Sort() and BynarySearch()
     internal class ContenderComparer : IComparer<Contender>
     {
         public int Compare(Contender contender1, Contender contender2)
         {
-            if (contender1.GetMark() > contender2.GetMark())
+            if (contender1.Mark > contender2.Mark)
             {
                 return 1;
             }
-            else if (contender1.GetMark() < contender2.GetMark())
+            else if (contender1.Mark < contender2.Mark)
             {
                 return -1;
             }

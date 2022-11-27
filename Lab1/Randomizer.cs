@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1
+namespace Labs
 {
     /// <summary>
     /// Randomizer give random first name, last name and mark (0, INT_MAX)
@@ -69,7 +69,7 @@ namespace Lab1
             if (Unique == true)
             {
                 //wait unique id of last_name
-                while (_uniqueLastName.Exists(x => x.Equals(random)) == true) 
+                while (_uniqueLastName.Exists(x => x.Equals(random)) == true)
                 {
                     randomLastName = random.Next(0, _LastNameCount);
                 }
