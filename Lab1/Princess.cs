@@ -52,16 +52,10 @@ namespace Labs
             return PrincessMark.NotTop;
         }
 
-        //Get old happy mark
-        public int GoToHallAndGetOldHappyMark(IContenderForPrincess contender)
+        //Get happy mark
+        public int GoToHallAndGetHappyMark(IContenderForPrincess contender)
         {
-            return _hall.GetOldHappyMark(contender);
-        }
-
-        //Get new happy mark
-        public int GoToHallAndGetNewHappyMark(IContenderForPrincess contender)
-        {
-            return _hall.GetNewHappyMark(contender);
+            return _hall.GetHappyMark(contender);
         }
 
         //Algorithm for finding the best candidate (classical skip algorithm is used 37%)
@@ -87,14 +81,13 @@ namespace Labs
                 if (ThinkAboutContender(contender) == PrincessMark.Top)
                 {
                     Console.WriteLine("--------------------------");
-                    Console.WriteLine($"{GoToHallAndGetOldHappyMark(contender)} => {GoToHallAndGetNewHappyMark(contender)}");
+                    Console.WriteLine($"{GoToHallAndGetHappyMark(contender)}");
                     break;
                 }
                 if (i == _hall.GetContendersCount() - 1)
                 {
                     Console.WriteLine("--------------------------");
                     Console.WriteLine("Принцесса никого не выбрала");
-                    Console.WriteLine($"{10} => {10}");
                 }
             }
             Console.WriteLine();

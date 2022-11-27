@@ -68,27 +68,14 @@ namespace Labs
             }
         }
 
-        //Get result in mark of happy to Princess (old mark)
-        public int GetOldHappyMark(IContenderForPrincess contender)
+        //Get result in mark of happy to Princess
+        public int GetHappyMark(IContenderForPrincess contender)
         {
             var cc = new ContenderComparer();
             //Sort from min to max + 1
             int index = _hallSort.BinarySearch((Contender)contender, cc) + 1;
             if (index <= 50) index = 0;
             return index;
-        }
-
-        //Get result in mark of happy to Princess (new mark)
-        public int GetNewHappyMark(IContenderForPrincess contender)
-        {
-            int mark = GetOldHappyMark(contender);
-            switch (mark)
-            {
-                case 100: return 20;
-                case 98: return 50;
-                case 96: return 100;
-                default: return 0;
-            }
         }
     }
 }

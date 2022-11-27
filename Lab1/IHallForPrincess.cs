@@ -9,10 +9,7 @@ namespace Labs
     internal interface IHallForPrincess
     {
         //Get result in mark of happy to Princess (old mark)
-        public int GetOldHappyMark(IContenderForPrincess contender);
-
-        //Get result in mark of happy to Princess (new mark)
-        public int GetNewHappyMark(IContenderForPrincess contender);
+        public int GetHappyMark(IContenderForPrincess contender);
 
         //Get contenders count in hall
         public int GetContendersCount();
