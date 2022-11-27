@@ -18,10 +18,10 @@ namespace Labs
         {
             return Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, services) =>
             {
-                Hall hall = new Hall();
                 services.AddHostedService<Princess>();
-                services.AddScoped<IHall>(sp => hall);
-                services.AddScoped<IHallForPrincess>(sp => hall);
+                services.AddScoped<Hall>();
+                services.AddScoped<IHall>(sp => sp.GetRequiredService<Hall>());
+                services.AddScoped<IHallForPrincess>(sp => sp.GetRequiredService<Hall>());
                 services.AddScoped<Friend>();
             });
         }
