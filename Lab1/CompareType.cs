@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Labs
 {
     //For compare contender, who accepting by Princess
-    enum CompareType
+    public enum CompareType
     {
         Better,
         Worse

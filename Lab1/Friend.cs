@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Labs
 {
-    internal class Friend
+    public class Friend
     {
         private readonly IHall _hall;
         

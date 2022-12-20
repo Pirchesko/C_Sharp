@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Labs
 {
     //Class for Sort() and BynarySearch()
-    internal class ContenderComparer : IComparer<Contender>
+    public class ContenderComparer : IComparer<Contender>
     {
         public int Compare(Contender contender1, Contender contender2)
         {

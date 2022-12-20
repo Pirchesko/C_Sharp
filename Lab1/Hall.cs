@@ -9,22 +9,23 @@ namespace Labs
     /// <summary>
     /// Hall which live Contenders
     /// </summary>
-    internal class Hall : IHallForPrincess, IHall
+    public class Hall : IHallForPrincess, IHall
     {
         //count contenders
-        private const int _ContendersCount = 100;
+        public int ContendersCount { get; }
+
+        //contender generator
+        private readonly IContenderGenerator _contenderGenerator;
         //hall which wait contenders
         private List<Contender> _hall = new List<Contender>();
         //sorted hall, for get level of happy Princess
         private List<Contender> _hallSort = new List<Contender>();
 
-        public Hall()
+        public Hall(IContenderGenerator contenderGenerator)
         {
-            for (int i = 0; i < _ContendersCount; i++)
-            {
-                _hall.Add(new Contender());
-            }
-
+            _contenderGenerator = contenderGenerator;
+            ContendersCount = _contenderGenerator.ContendersCount();
+            _hall = _contenderGenerator.CreateListContender();
             _hallSort.AddRange(from c in _hall orderby c.Mark select c);
         }
 
@@ -41,11 +42,6 @@ namespace Labs
             {
                 throw new Exception("В коридоре больше нету претендентов!");
             }
-        }
-
-        public int GetContendersCount()
-        {
-            return _ContendersCount;
         }
 
         //Is contender in hall at the moment?

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Labs
 {
-    internal interface IHallForPrincess
+    public interface IHallForPrincess
     {
+        //count contenders
+        public int ContendersCount { get; }
+
         //Get result in mark of happy to Princess (old mark)
         public int GetHappyMark(IContenderForPrincess contender);
-
-        //Get contenders count in hall
-        public int GetContendersCount();
 
         //Getting conteder from hall
         public Contender GetNextContender();

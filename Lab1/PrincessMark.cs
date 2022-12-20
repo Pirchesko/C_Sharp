@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labs
 {
-    enum PrincessMark
+    public enum PrincessMark
     {
         Top,
         NotTop

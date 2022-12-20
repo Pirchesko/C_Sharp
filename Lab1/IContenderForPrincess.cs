@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Labs
 {
     //Interface for cooparation with Princess (without GetMark())
-    internal interface IContenderForPrincess
+    public interface IContenderForPrincess
     {
         string FirstName { get; }
         string LastName { get; }

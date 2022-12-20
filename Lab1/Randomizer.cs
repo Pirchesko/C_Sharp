@@ -13,7 +13,7 @@ namespace Labs
     /// first_names.txt - top 100 popular russian first name;
     /// last_names.txt - top 500 popular russian last name;
     /// </summary>
-    internal static class Randomizer
+    public static class Randomizer
     {
         private const int _FirstNameCount = 100;
         private const int _LastNameCount = 500;
