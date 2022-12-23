@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     /// <summary>
     /// Randomizer give random first name, last name and mark (0, INT_MAX)

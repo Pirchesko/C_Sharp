@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     public interface IContenderGenerator
     {
-        //create list of contenders
+        /// <summary>
+        /// Create list of contenders
+        /// </summary>
+        /// <returns>list with contenders</returns>
         public List<Contender> CreateListContender();
-
-        //return contendersCount
-        public int ContendersCount();
     }
 }

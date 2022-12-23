@@ -4,17 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     public interface IHallForPrincess
     {
-        //count contenders
-        public int ContendersCount { get; }
-
-        //Get result in mark of happy to Princess (old mark)
+        /// <summary>
+        /// Get mark with search by FristName and LastName
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns>mark contender</returns>
+        /// <exception cref="Exception"></exception>
         public int GetHappyMark(IContenderForPrincess contender);
 
-        //Getting conteder from hall
+        /// <summary>
+        /// Getting conteder from hall
+        /// </summary>
+        /// <returns>next contender from hall</returns>
+        /// <exception cref="Exception"></exception>
         public Contender GetNextContender();
     }
 }

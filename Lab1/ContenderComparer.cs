@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
-    //Class for Sort() and BynarySearch()
+    /// <summary>
+    /// Class create for Sort() and BynarySearch()
+    /// </summary>
     public class ContenderComparer : IComparer<Contender>
     {
         public int Compare(Contender contender1, Contender contender2)

@@ -5,7 +5,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Labs
+namespace FastidiousPrincess
 {   
     public class Program
     {

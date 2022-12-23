@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Hosting;
 using Moq;
 using System;
-using Labs;
+using FastidiousPrincess;
 using FluentAssertions.Equivalency;
 using NUnit.Framework;
 using FluentAssertions;
@@ -10,7 +10,6 @@ namespace TestFastidiousPrincess
 {
     public class PrincessTest
     {
-        private const int _ContendersCount = 100;
         private Mock<IHostApplicationLifetime> _lifetime;
         private Mock<IContenderGenerator> _contenderGenerator;
 
@@ -21,11 +20,10 @@ namespace TestFastidiousPrincess
             _contenderGenerator = new Mock<IContenderGenerator>();
         }
 
-        List<Contender> CreateContenderListForPrincessWhoGet10()
+        List<Contender> CreateContenderListForPrincessWhoNotMarried()
         {
             var contenders = new List<Contender>();
-            int contendersCount = 100;
-            for (int i = contendersCount; i > 0; i--)
+            for (int i = Constants.ContendersCount; i > 0; i--)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
@@ -36,11 +34,10 @@ namespace TestFastidiousPrincess
         }
 
         [Test]
-        public void FindBestContender_GetHappy10()
+        public void FindBestContender_PrincessNotMarried()
         {
-            List<Contender> contenderList = CreateContenderListForPrincessWhoGet10();
+            List<Contender> contenderList = CreateContenderListForPrincessWhoNotMarried();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
             var friend = new Friend(hall);
             var princess = new Princess(hall, friend, _lifetime.Object);
@@ -52,11 +49,10 @@ namespace TestFastidiousPrincess
             happyMark.Should().Be(happyMarkIfPrincessNotMarried);
         }
 
-        List<Contender> CreateContenderListForPrincessWhoGet0()
+        List<Contender> CreateContenderListForPrincessWhoMarriedOnLooser()
         {
             var contenders = new List<Contender>();
-            int contendersCount = 100;
-            for (int i = 1; i <= contendersCount; i++)
+            for (int i = 1; i <= Constants.ContendersCount; i++)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
@@ -67,11 +63,10 @@ namespace TestFastidiousPrincess
         }
 
         [Test]
-        public void FindBestContender_GetHappy0()
+        public void FindBestContender_PrincessMarriedOnLooser()
         {
-            List<Contender> contenderList = CreateContenderListForPrincessWhoGet0();
+            List<Contender> contenderList = CreateContenderListForPrincessWhoMarriedOnLooser();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
             var friend = new Friend(hall);
             var princess = new Princess(hall, friend, _lifetime.Object);
@@ -83,18 +78,17 @@ namespace TestFastidiousPrincess
             happyMark.Should().Be(happyMarkIfPrincessMarriesOnLooser);
         }
 
-        List<Contender> CreateContenderListForPrincessWhoGet100()
+        List<Contender> CreateContenderListForPrincessWhoMarriedOnBestContender()
         {
             var contenders = new List<Contender>();
-            int contendersCount = 100;
-            for (int i = 1; i <= 0.37 * contendersCount; i++)
+            for (int i = 1; i <= 0.37 * Constants.ContendersCount; i++)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
                 int mark = i;
                 contenders.Add(new Contender(firstName, lastName, mark));
             }
-            for (int i = contendersCount; i > 0.37 * contendersCount; i--)
+            for (int i = Constants.ContendersCount; i > 0.37 * Constants.ContendersCount; i--)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
@@ -105,11 +99,10 @@ namespace TestFastidiousPrincess
         }
 
         [Test]
-        public void FindBestContender_GetHappy100()
+        public void FindBestContender_PrincessMarriedOnBestContender()
         {
-            List<Contender> contenderList = CreateContenderListForPrincessWhoGet100();
+            List<Contender> contenderList = CreateContenderListForPrincessWhoMarriedOnBestContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
             var friend = new Friend(hall);
             var princess = new Princess(hall, friend, _lifetime.Object);
@@ -117,36 +110,33 @@ namespace TestFastidiousPrincess
             IContenderForPrincess contender = princess.FindBestContender();
             int happyMark = princess.GoToHallAndGetHappyMark(contender);
 
-            int happyMarkIfBestContender = 100;
-            happyMark.Should().Be(happyMarkIfBestContender);
+            int happyMarkIfMarriedOnBestContender = 100;
+            happyMark.Should().Be(happyMarkIfMarriedOnBestContender);
         }
 
-        List<Contender> CreateContenderListForPrincessGetExceptionNoContenders()
+        List<Contender> CreateContenderListWithOneContender()
         {
-            var contenders = new List<Contender>();
-            int contendersCount = 100;
-            int contendersCountForException = 50;
-            for (int i = contendersCount; i > contendersCountForException; i--)
-            {
-                string firstName = Randomizer.GetRandomFirstName();
-                string lastName = Randomizer.GetRandomWithoutRepeatLastName();
-                int mark = i;
-                contenders.Add(new Contender(firstName, lastName, mark));
-            }
-            return contenders;
+            var contenderList = new List<Contender>();
+            string firstName = Randomizer.GetRandomFirstName();
+            string lastName = Randomizer.GetRandomWithoutRepeatLastName();
+            int mark = Randomizer.GetRandomWithoutRepeatMark();
+            var contender = new Contender(firstName, lastName, mark);
+            contenderList.Add(contender);
+            return contenderList;
         }
 
         [Test]
         public void FindBestContender_NoContenders_ThrowException()
         {
-            List<Contender> contenderList = CreateContenderListForPrincessGetExceptionNoContenders();
+            List<Contender> contenderList = CreateContenderListWithOneContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
             var friend = new Friend(hall);
             var princess = new Princess(hall, friend, _lifetime.Object);
 
-            princess.Invoking(p => p.FindBestContender()).Should().Throw<Exception>().WithMessage("¬ коридоре больше нету претендентов!");
+            princess.Invoking(p => p.FindBestContender())
+                .Should().Throw<Exception>()
+                .WithMessage("¬ коридоре больше нету претендентов!");
         }
     }
 }

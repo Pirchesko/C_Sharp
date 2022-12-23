@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace FastidiousPrincess
 {
     /// <summary>
-    /// Opinion of princess about contender
+    /// Class with something const
     /// </summary>
-    public enum PrincessMark
+    public static class Constants
     {
-        Top,
-        NotTop
+        /// <summary>
+        /// Contenders in hall constant
+        /// </summary>
+        public const int ContendersCount = 100;
     }
 }

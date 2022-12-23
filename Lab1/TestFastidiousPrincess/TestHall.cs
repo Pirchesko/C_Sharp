@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Labs;
+using FastidiousPrincess;
 using Microsoft.Extensions.Hosting;
 using Moq;
 using System;
@@ -13,26 +13,22 @@ namespace TestFastidiousPrincess
 {
     public class TestHall
     {
-        private const int _ContendersCount = 100;
-        private Mock<IHostApplicationLifetime> _lifetime;
         private Mock<IContenderGenerator> _contenderGenerator;
 
         [SetUp]
         public void Setup()
         {
-            _lifetime = new Mock<IHostApplicationLifetime>();
             _contenderGenerator = new Mock<IContenderGenerator>();
         }
 
-        List<Contender> CreateContenderListForHallTest()
+        List<Contender> CreateContenderListWithTwoContenders()
         {
             var contenders = new List<Contender>();
-            int contendersCount = 100;
-            for (int i = contendersCount; i > 0; i--)
+            for (int i = 0; i < 2; i++)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
-                int mark = i;
+                int mark = Randomizer.GetRandomWithoutRepeatMark();
                 contenders.Add(new Contender(firstName, lastName, mark));
             }
             return contenders;
@@ -41,9 +37,8 @@ namespace TestFastidiousPrincess
         [Test]
         public void GetNextContender_ReturnContender()
         {
-            List<Contender> contenderList = CreateContenderListForHallTest();
+            List<Contender> contenderList = CreateContenderListWithTwoContenders();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
 
             var contenderFirst = contenderList[0];
@@ -67,7 +62,6 @@ namespace TestFastidiousPrincess
         {
             List<Contender> contenderList = CreateContenderListWithOneContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
-            _contenderGenerator.Setup(contenderGenerator => contenderGenerator.ContendersCount()).Returns(_ContendersCount);
             Hall hall = new Hall(_contenderGenerator.Object);
             hall.GetNextContender();
             hall.Invoking(h => h.GetNextContender()).Should().Throw<Exception>().WithMessage("В коридоре больше нету претендентов!");
@@ -97,7 +91,9 @@ namespace TestFastidiousPrincess
             int mark = Randomizer.GetRandomWithoutRepeatMark();
             var contender = new Contender(firstName, lastName, mark);
 
-            hall.Invoking(h => h.GetMarkByName(contender)).Should().Throw<Exception>().WithMessage("Такого претендента не существовало");
+            hall.Invoking(h => h.GetMarkByName(contender))
+                .Should().Throw<Exception>()
+                .WithMessage("Такого претендента не существовало");
         }
     }
 }

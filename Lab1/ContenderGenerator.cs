@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     /// <summary>
-    /// Only create ContendersCount contenders
+    /// Generate random ContendersCount contenders
     /// </summary>
     public class ContenderGenerator : IContenderGenerator
     {
-        //count contenders
-        private const int _ContendersCount = 100;
-
-        //create list of contenders
+        /// <summary>
+        /// Create list of contenders
+        /// </summary>
+        /// <returns>list with contenders</returns>
         public List<Contender> CreateListContender()
         {
             var contenders = new List<Contender>();
-            for (int i = 0; i < _ContendersCount; i++)
+            for (int i = 0; i < Constants.ContendersCount; i++)
             {
                 string firstName = Randomizer.GetRandomFirstName();
                 string lastName = Randomizer.GetRandomWithoutRepeatLastName();
@@ -26,12 +26,6 @@ namespace Labs
                 contenders.Add(new Contender(firstName, lastName, mark));
             }
             return contenders;
-        }
-
-        //return contendersCount
-        public int ContendersCount()
-        {
-            return _ContendersCount;
         }
     }
 }

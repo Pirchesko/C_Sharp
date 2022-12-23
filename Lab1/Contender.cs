@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     /// <summary>
-    /// For default class initialise with random first name, last name, mark
-    /// Use: new Contender(false); if you need init class without first, last names and mark
+    /// Contender create with input 3 parametrs
     /// </summary>
     public class Contender : IContenderForPrincess
     {
