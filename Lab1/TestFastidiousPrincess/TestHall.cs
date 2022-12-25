@@ -81,10 +81,7 @@ namespace TestFastidiousPrincess
             Hall hall = new Hall(_contenderGenerator.Object);
             hall.InitHall();
 
-            string firstName = Randomizer.GetRandomFirstName();
-            string lastName = Randomizer.GetRandomWithoutRepeatLastName();
-            int mark = Randomizer.GetRandomWithoutRepeatMark();
-            var contender = new Contender(firstName, lastName, mark);
+            var contender = new Contender("name ?", "last name ?", 10);
 
             hall.Invoking(h => h.GetMarkByName(contender))
                 .Should().Throw<Exception>()

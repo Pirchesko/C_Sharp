@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Hosting;
+п»їusing Microsoft.Extensions.Hosting;
 using Moq;
 using System;
 using FastidiousPrincess;
@@ -136,7 +136,7 @@ namespace TestFastidiousPrincess
 
             princess.Invoking(p => p.FindBestContender())
                 .Should().Throw<Exception>()
-                .WithMessage("В коридоре больше нету претендентов!");
+                .WithMessage("Р’ РєРѕСЂРёРґРѕСЂРµ Р±РѕР»СЊС€Рµ РЅРµС‚Сѓ РїСЂРµС‚РµРЅРґРµРЅС‚РѕРІ!");
         }
     }
 }
