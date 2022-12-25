@@ -24,8 +24,8 @@ namespace TestFastidiousPrincess
         List<Contender> CreateContenderListForFriendTest()
         {
             var contenders = new List<Contender>();
-            contenders.Add(new Contender(Randomizer.GetRandomFirstName(), Randomizer.GetRandomWithoutRepeatLastName(), 10));
-            contenders.Add(new Contender(Randomizer.GetRandomFirstName(), Randomizer.GetRandomWithoutRepeatLastName(), 5));
+            contenders.Add(new Contender("name 1", "last name 1", 10));
+            contenders.Add(new Contender("name 2", "last name 2", 5));
             return contenders;
         }
 
@@ -35,6 +35,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListForFriendTest();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
             var friend = new Friend(hall);
 
             var bestContender = hall.GetNextContender();
@@ -49,6 +50,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListForFriendTest();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
             var friend = new Friend(hall);
 
             var bestContender = hall.GetNextContender();
@@ -63,6 +65,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListForFriendTest();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
             var friend = new Friend(hall);
 
             var bestContender = contenderList[0];

@@ -82,6 +82,7 @@ namespace FastidiousPrincess
         /// <returns>contender if princess choose</returns>
         public IContenderForPrincess FindBestContender()
         {
+            _hall.InitHall();
             IContenderForPrincess contender;
 
             //Classic algorithm: skip 37%

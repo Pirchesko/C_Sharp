@@ -22,5 +22,10 @@ namespace FastidiousPrincess
         /// <returns>next contender from hall</returns>
         /// <exception cref="Exception"></exception>
         public Contender GetNextContender();
+
+        /// <summary>
+        /// Create list contender for hall
+        /// </summary>
+        public void InitHall();
     }
 }

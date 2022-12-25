@@ -24,13 +24,8 @@ namespace TestFastidiousPrincess
         List<Contender> CreateContenderListWithTwoContenders()
         {
             var contenders = new List<Contender>();
-            for (int i = 0; i < 2; i++)
-            {
-                string firstName = Randomizer.GetRandomFirstName();
-                string lastName = Randomizer.GetRandomWithoutRepeatLastName();
-                int mark = Randomizer.GetRandomWithoutRepeatMark();
-                contenders.Add(new Contender(firstName, lastName, mark));
-            }
+            contenders.Add(new Contender("name 1", "last name 1", 1));
+            contenders.Add(new Contender("name 2", "last name 2", 2));
             return contenders;
         }
 
@@ -40,6 +35,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListWithTwoContenders();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
 
             var contenderFirst = contenderList[0];
             var contender = hall.GetNextContender();
@@ -49,11 +45,7 @@ namespace TestFastidiousPrincess
         List<Contender> CreateContenderListWithOneContender()
         {
             var contenderList = new List<Contender>();
-            string firstName = Randomizer.GetRandomFirstName();
-            string lastName = Randomizer.GetRandomWithoutRepeatLastName();
-            int mark = Randomizer.GetRandomWithoutRepeatMark();
-            var contender = new Contender(firstName, lastName, mark);
-            contenderList.Add(contender);
+            contenderList.Add(new Contender("name 1", "last name 1", 1));
             return contenderList;
         }
 
@@ -63,6 +55,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListWithOneContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
             hall.GetNextContender();
             hall.Invoking(h => h.GetNextContender()).Should().Throw<Exception>().WithMessage("В коридоре больше нету претендентов!");
         }
@@ -73,6 +66,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListWithOneContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
             Contender contender = hall.GetNextContender();
             int markByName = hall.GetMarkByName(contender);
             int mark = contender.Mark;
@@ -85,6 +79,7 @@ namespace TestFastidiousPrincess
             List<Contender> contenderList = CreateContenderListWithOneContender();
             _contenderGenerator.Setup(contenderGenerator => contenderGenerator.CreateListContender()).Returns(contenderList);
             Hall hall = new Hall(_contenderGenerator.Object);
+            hall.InitHall();
 
             string firstName = Randomizer.GetRandomFirstName();
             string lastName = Randomizer.GetRandomWithoutRepeatLastName();

@@ -24,16 +24,18 @@ namespace FastidiousPrincess
         /// </summary>
         private List<Contender> _hallSort = new List<Contender>();
 
-        private void CreateListHall()
+        /// <summary>
+        /// Create list contender for hall
+        /// </summary>
+        public void InitHall()
         {
             _hall = _contenderGenerator.CreateListContender();
+            _hallSort.AddRange(from c in _hall orderby c.Mark select c);
         }
         
         public Hall(IContenderGenerator contenderGenerator)
         {
             _contenderGenerator = contenderGenerator;
-            CreateListHall();
-            _hallSort.AddRange(from c in _hall orderby c.Mark select c);
         }
 
         /// <summary>

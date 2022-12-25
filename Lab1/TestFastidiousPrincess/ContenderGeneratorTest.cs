@@ -18,6 +18,7 @@ namespace TestFastidiousPrincess
         {
             ContenderGenerator contenderGenerator = new ContenderGenerator();
             Hall hall = new Hall(contenderGenerator);
+            hall.InitHall();
             var contenderList = new List<Contender>();
             for (int i = 0; i < Constants.ContendersCount; i++)
             {
