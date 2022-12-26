@@ -5,9 +5,9 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Labs
-{
-    internal class Program
+namespace FastidiousPrincess
+{   
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -19,6 +19,7 @@ namespace Labs
             return Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, services) =>
             {
                 services.AddHostedService<Princess>();
+                services.AddScoped<IContenderGenerator, ContenderGenerator>();
                 services.AddScoped<Hall>();
                 services.AddScoped<IHall>(sp => sp.GetRequiredService<Hall>());
                 services.AddScoped<IHallForPrincess>(sp => sp.GetRequiredService<Hall>());

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
-    //Interface for cooparation with Princess (without GetMark())
-    internal interface IContenderForPrincess
+    /// <summary>
+    /// Interface for cooparation with Princess (without GetMark())
+    /// </summary>
+    public interface IContenderForPrincess
     {
         string FirstName { get; }
         string LastName { get; }

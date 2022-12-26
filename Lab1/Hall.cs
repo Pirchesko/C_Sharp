@@ -1,34 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     /// <summary>
     /// Hall which live Contenders
     /// </summary>
-    internal class Hall : IHallForPrincess, IHall
+    public class Hall : IHallForPrincess, IHall
     {
-        //count contenders
-        private const int _ContendersCount = 100;
-        //hall which wait contenders
+        private readonly IContenderGenerator _contenderGenerator;
+        
+        /// <summary>
+        /// hall in which contenders are waiting
+        /// </summary>
         private List<Contender> _hall = new List<Contender>();
-        //sorted hall, for get level of happy Princess
+        
+        /// <summary>
+        /// sorted hall, for get level of happy Princess
+        /// </summary>
         private List<Contender> _hallSort = new List<Contender>();
 
-        public Hall()
+        /// <summary>
+        /// Create list contender for hall
+        /// </summary>
+        public void InitHall()
         {
-            for (int i = 0; i < _ContendersCount; i++)
-            {
-                _hall.Add(new Contender());
-            }
-
+            _hall = _contenderGenerator.CreateListContender();
             _hallSort.AddRange(from c in _hall orderby c.Mark select c);
         }
+        
+        public Hall(IContenderGenerator contenderGenerator)
+        {
+            _contenderGenerator = contenderGenerator;
+        }
 
-        //Getting conteder from hall
+        /// <summary>
+        /// Getting conteder from hall
+        /// </summary>
+        /// <returns>next contender from hall</returns>
+        /// <exception cref="Exception"></exception>
         public Contender GetNextContender()
         {
             if (_hall.Count > 0)
@@ -43,18 +57,22 @@ namespace Labs
             }
         }
 
-        public int GetContendersCount()
-        {
-            return _ContendersCount;
-        }
-
-        //Is contender in hall at the moment?
+        /// <summary>
+        /// Is contender in hall at the moment?
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns>true if contender in hall at the moment</returns>
         public bool CheckContederInHall(IContenderForPrincess contender)
         {
             return _hall.Exists(x => x.Equals(contender));
         }
 
-        //Get mark with search by FristName and LastName
+        /// <summary>
+        /// Get mark with search by FristName and LastName
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns>mark contender</returns>
+        /// <exception cref="Exception"></exception>
         public int GetMarkByName(IContenderForPrincess contender)
         {
             Contender? contenderWithMark = _hallSort.Find(x => x.FirstName == contender.FirstName && x.LastName == contender.LastName);
@@ -68,7 +86,11 @@ namespace Labs
             }
         }
 
-        //Get result in mark of happy to Princess
+        /// <summary>
+        /// Get result in mark of happy to Princess
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns>happiness</returns>
         public int GetHappyMark(IContenderForPrincess contender)
         {
             var cc = new ContenderComparer();

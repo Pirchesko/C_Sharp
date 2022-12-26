@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
-    internal class Princess : IHostedService
+    public class Princess : IHostedService
     {
         private readonly Friend _friend;
         private readonly IHallForPrincess _hall;
-        //Princess, with the help of her Friend, create list top contenders
+        /// <summary>
+        /// Princess create list top contenders with the help of her Friend
+        /// </summary>
         private List<IContenderForPrincess> _topContenders = new List<IContenderForPrincess>();
 
         IHostApplicationLifetime _lifeTime;
@@ -23,7 +25,11 @@ namespace Labs
             _lifeTime = lifeTime;
         }
 
-        //Princess thinking about current contender and compare with contender, which was accapt with help Friend
+        /// <summary>
+        /// Princess thinking about current contender and compare with contender, which was accapt with help Friend
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns></returns>
         public PrincessMark ThinkAboutContender(IContenderForPrincess contender)
         {
             int i = 0;
@@ -52,19 +58,35 @@ namespace Labs
             return PrincessMark.NotTop;
         }
 
-        //Get happy mark
+        /// <summary>
+        /// Get happy mark
+        /// </summary>
+        /// <param name="contender"></param>
+        /// <returns>happiness</returns>
         public int GoToHallAndGetHappyMark(IContenderForPrincess contender)
         {
-            return _hall.GetHappyMark(contender);
+            if (contender == null)
+            {
+                int happyMarkWhenPrincessNotChooseAnyone = 10;
+                return happyMarkWhenPrincessNotChooseAnyone;
+            }
+            else
+            {
+                return _hall.GetHappyMark(contender);
+            }
         }
 
-        //Algorithm for finding the best candidate (classical skip algorithm is used 37%)
-        public void FindBestContender()
+        /// <summary>
+        /// Algorithm for finding the best candidate (classical skip algorithm is used 37%)
+        /// </summary>
+        /// <returns>contender if princess choose</returns>
+        public IContenderForPrincess FindBestContender()
         {
+            _hall.InitHall();
             IContenderForPrincess contender;
 
             //Classic algorithm: skip 37%
-            for (int i = 0; i < 0.37 * _hall.GetContendersCount(); i++)
+            for (int i = 0; i < 0.37 * Constants.ContendersCount; i++)
             {
                 contender = _hall.GetNextContender();
                 Console.WriteLine($"№ {i}:\t{contender.LastName} {contender.FirstName}");
@@ -74,30 +96,44 @@ namespace Labs
             Console.WriteLine("------ 37% skipped! ------");
 
             //Choose first best contender. if all contenders are not best - then Princess will not married
-            for (int i = (int)(0.37 * _hall.GetContendersCount()); i < _hall.GetContendersCount(); i++)
+            for (int i = (int)(0.37 * Constants.ContendersCount); i < Constants.ContendersCount; i++)
             {
                 contender = _hall.GetNextContender();
                 Console.WriteLine($"№ {i}:\t{contender.FirstName} {contender.LastName}");
                 if (ThinkAboutContender(contender) == PrincessMark.Top)
                 {
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine($"{GoToHallAndGetHappyMark(contender)}");
-                    break;
+                    return contender;
                 }
-                if (i == _hall.GetContendersCount() - 1)
+                if (i == Constants.ContendersCount - 1)
                 {
-                    Console.WriteLine("--------------------------");
-                    Console.WriteLine("Принцесса никого не выбрала");
+                    return null;
                 }
             }
-            Console.WriteLine();
+            return null;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
-                FindBestContender();
+                IContenderForPrincess bestContender;
+                bestContender = FindBestContender();
+                int happyMark = GoToHallAndGetHappyMark(bestContender);
+                Console.WriteLine("---------------------------");
+                
+                switch (happyMark)
+                {
+                    case 0:
+                        Console.WriteLine("Принцесса вышла замуж за неудачника");
+                        break;
+                    case 10:
+                        Console.WriteLine("Принцесса никого не выбрала");
+                        break;
+                    default:
+                        Console.WriteLine($"{happyMark}");
+                        break;
+                }
+                Console.WriteLine();
             }
             catch (Exception ex)
             {

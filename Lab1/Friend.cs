@@ -6,9 +6,9 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
-    internal class Friend
+    public class Friend
     {
         private readonly IHall _hall;
         

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
     /// <summary>
     /// Randomizer give random first name, last name and mark (0, INT_MAX)
@@ -13,7 +13,7 @@ namespace Labs
     /// first_names.txt - top 100 popular russian first name;
     /// last_names.txt - top 500 popular russian last name;
     /// </summary>
-    internal static class Randomizer
+    public static class Randomizer
     {
         private const int _FirstNameCount = 100;
         private const int _LastNameCount = 500;

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Labs
+namespace FastidiousPrincess
 {
-    //For compare contender, who accepting by Princess
-    enum CompareType
+    /// <summary>
+    /// For compare contender, who accepting by Princess
+    /// </summary>
+    public enum CompareType
     {
         Better,
         Worse
